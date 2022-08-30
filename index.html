@@ -9,23 +9,24 @@
     <title>BMI Calculator</title>
 </head>
 <body>
-    <form id="input-form">
-        <label for="User name"> User Name</label>
+    <section class="wrapper">
+        <form id="input-form">
+            <label for="User name"> User Name</label>
         <input type="text" placeholder="User name" id="input-name" name="User name">
 
-        <label for="Height">Height</label>
+        <label for="Height">Height in meters</label>
         <input type="text" placeholder="Enter your height" id="input-height" name="Height">
 
-        <label for="Weight"> Weight</label>
+        <label for="Weight">Weight in Kg</label>
         <input type="text" placeholder="Enter your weight" id="input-weight" name="Weight">
-
-        <input type="submit">
+        
+        <input type="submit" id="submit">
     </form>
-
-    <div>
+    <div class="cards">
         <ul id="calculations-list">
             
         </ul>
     </div>
+</section>
 </body>
 </html>

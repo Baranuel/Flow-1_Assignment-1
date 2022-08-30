@@ -7,37 +7,43 @@ const weight = document.getElementById('input-weight')
 let list  = document.getElementById('calculations-list')
 // let listItem = document.getElementById('calculations-list-item')
 const calculations = []
+let lastItem;
 
-
-
-const submitBmi = (height, weight) => {
-    const sqrHeight = (+height.value) * (+height.value)
-    
-    const calculatedUser = {
-        user: user.value ,
-        height: +height.value ,
-        weight: +weight.value ,
-        calculatedBmi: (height, weight) => {
-            const sqrHeight = (+height) * (+height)
-            console.log(sqrHeight)
-            console.log(height)
-            return +weight / sqrHeight
-        }
+class User {
+    constructor(user, height, weight){
+        this.user = user,
+        this.height = +height,
+        this.weight = +weight
+        this.bmi = this.CalculateBmi(height, weight)
     }
+    CalculateBmi = (height, weight) => {
+        //converting strings to numbers
+        height = +height
+        weight = +weight
+        const squaredHeight = height * height
+        return weight / squaredHeight
+    }
+}
+
+const calculateBmi = (user, height, weight) => {
+    const newUser = new User(user, height, weight)
+    calculations.push(newUser)
+    lastItem = calculations[calculations.length - 1]
     
-    calculations.push(calculatedUser)
-    console.log(calculations)
-    let lastItem =  calculations[calculations.length - 1]
- 
-    addCalculationItem(lastItem)
-    clearFields()
 }
 
 
 
 form.addEventListener('submit', e => {
     e.preventDefault()
-    submitBmi(height, weight)
+    const userValue = user.value
+    const heightValue = height.value
+    const  weightValue = weight.value
+    lastItem = calculations[calculations.length - 1]
+
+    calculateBmi(userValue,heightValue, weightValue)
+    clearFields()
+    addCalculationItem(lastItem)
 })
 
 
@@ -49,11 +55,12 @@ const clearFields = () => {
 
 function addCalculationItem (item) {
         let listItem = document.createElement("li");
+        listItem.classList.add("appear")
         listItem.innerHTML = `
-            <h3>User: ${item.user}</h3>
-            <h3>Height: ${item.height}m</h3>
-            <h3>Weight: ${item.weight}kg</h3>
-            <h3>BMI: ${item.calculatedBmi(item.height, item.weight)}kg</h3>
+            <h3>User: <span> ${item.user}</span></h3>
+            <h3>Height: <span>${item.height} meters</span> </h3>
+            <h3>Weight: <span>${item.weight} kg</span></h3>
+            <h3>BMI: <span>${item.bmi}</span></h3>
         `
         list.append(listItem)
 }
