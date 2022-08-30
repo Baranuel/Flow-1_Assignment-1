@@ -1,0 +1,10 @@
+ li {
+    border: 1px solid black;
+    padding: 1rem;
+    margin: 1rem;
+    list-style-type: none;
+}
+
+li::marker {
+    opacity: 0;
+}
