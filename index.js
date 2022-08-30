@@ -25,11 +25,10 @@ class User {
     }
 }
 
-const calculateBmi = (user, height, weight) => {
+const createUser = (user, height, weight) => {
     const newUser = new User(user, height, weight)
     calculations.push(newUser)
     lastItem = calculations[calculations.length - 1]
-    
 }
 
 
@@ -40,8 +39,7 @@ form.addEventListener('submit', e => {
     const heightValue = height.value
     const  weightValue = weight.value
     lastItem = calculations[calculations.length - 1]
-
-    calculateBmi(userValue,heightValue, weightValue)
+    createUser(userValue,heightValue, weightValue)
     clearFields()
     addCalculationItem(lastItem)
 })
